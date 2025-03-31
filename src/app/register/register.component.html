@@ -1,0 +1,42 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Nombre -->
+    <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" formControlName="name" class="form-control">
+        <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="text-danger">
+            <div *ngIf="registerForm.get('name')?.errors?.['required']">El nombre es requerido</div>
+        </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="form-group">
+        <label>Edad:</label>
+        <input type="number" formControlName="age" class="form-control">
+        <div *ngIf="registerForm.get('age')?.invalid && (registerForm.get('age')?.dirty || registerForm.get('age')?.touched)" class="text-danger">
+            <div *ngIf="registerForm.get('age')?.errors?.['required']">La edad es requerida</div>
+            <div *ngIf="registerForm.get('age')?.errors?.['min']">Debes ser mayor de 18 años</div>
+        </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+        <label>Contraseña:</label>
+        <input type="password" formControlName="password" class="form-control">
+        <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="text-danger">
+            <div *ngIf="registerForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
+            <div *ngIf="registerForm.get('password')?.errors?.['min']">Mínimo 6 caracteres</div>
+        </div>
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div class="form-group">
+        <label>Repetir Contraseña:</label>
+        <input type="password" formControlName="confirmPassword" class="form-control">
+        <div *ngIf="(registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched)" class="text-danger">
+            <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">Confirma tu contraseña</div>
+            <div *ngIf="registerForm.errors?.['passwordMismatch']">Las contraseñas no coinciden</div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Registrar</button>
+</form>

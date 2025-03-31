@@ -20,4 +20,8 @@ export class UserService {
   getUser(id: number): Observable<User>{
     return this.http.get<User>(this.apiUrl+"/"+id);
   }
+
+  registerUser(userData: any) {
+    return this.http.post(this.apiUrl, userData);
+  }
 }
